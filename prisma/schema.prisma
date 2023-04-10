@@ -1,0 +1,70 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userNum    String     @id @db.Char(2)
+  lastName   String     @db.VarChar(15)
+  firstName  String     @db.VarChar(15)
+  street     String     @db.VarChar(15)
+  city       String     @db.VarChar(15)
+  state      String     @db.VarChar(2)
+  postalCode String     @db.VarChar(5)
+  commission Decimal    @db.Decimal(7, 2)
+  rate       Decimal    @db.Decimal(3, 2)
+  password   String     @db.VarChar(64)
+  role       Boolean    @db.Boolean
+  customers  Customer[]
+}
+
+model Customer {
+  customerNum String   @id @db.Char(3)
+  lastName    String   @db.VarChar(15)
+  firstName   String   @db.VarChar(15)
+  street      String   @db.VarChar(15)
+  city        String   @db.VarChar(15)
+  state       String   @db.VarChar(2)
+  postalCode  String   @db.VarChar(5)
+  balance     Decimal  @db.Decimal(8, 2)
+  creditLimit Decimal  @db.Decimal(8, 2)
+  userNum     String?  @db.Char(2)
+  user        User?    @relation(fields: [userNum], references: [userNum])
+  orders      Orders[]
+}
+
+model Orders {
+  orderNum    String      @id @db.Char(5)
+  orderDate   DateTime    @db.Date
+  customerNum String      @db.Char(3)
+  customer    Customer?   @relation(fields: [customerNum], references: [customerNum])
+  orderItems  OrderItem[]
+}
+
+model Item {
+  itemNum     String      @id @db.Char(4)
+  description String      @db.VarChar(30)
+  onHand      Decimal     @db.Decimal(4, 0)
+  category    String      @db.VarChar(4)
+  storehouse  String      @db.VarChar(1)
+  price       Decimal     @db.Decimal(6, 2)
+  orderItems  OrderItem[]
+}
+
+model OrderItem {
+  orderNum   String  @db.Char(5)
+  itemNum    String  @db.Char(4)
+  numOrdered Decimal @db.Decimal(3, 0)
+  price      Decimal @db.Decimal(6, 2)
+  order      Orders  @relation(fields: [orderNum], references: [orderNum])
+  item       Item    @relation(fields: [itemNum], references: [itemNum])
+
+  @@id([orderNum, itemNum])
+}

@@ -11,18 +11,18 @@ datasource db {
 }
 
 model User {
-  userNum    String     @id @db.Char(2)
-  lastName   String     @db.VarChar(15)
-  firstName  String     @db.VarChar(15)
-  street     String     @db.VarChar(15)
-  city       String     @db.VarChar(15)
-  state      String     @db.VarChar(2)
-  postalCode String     @db.VarChar(5)
-  commission Decimal    @db.Decimal(7, 2)
-  rate       Decimal    @db.Decimal(3, 2)
-  password   String     @db.VarChar(64)
-  role       Boolean    @db.Boolean
-  customers  Customer[]
+  userNum        String     @id @db.Char(2)
+  lastName       String     @db.VarChar(15)
+  firstName      String     @db.VarChar(15)
+  street         String     @db.VarChar(15)
+  city           String     @db.VarChar(15)
+  state          String     @db.VarChar(2)
+  postalCode     String     @db.VarChar(5)
+  commission     Decimal    @db.Decimal(7, 2)
+  rate           Decimal    @db.Decimal(3, 2)
+  hashedPassword String     @db.VarChar(64)
+  hasAdmin       Boolean    @db.Boolean
+  customers      Customer[]
 }
 
 model Customer {

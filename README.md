@@ -1,38 +1,69 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Local environment setup
 
-First, run the development server:
+#### 1. Setup PostgreSQL
+We will be developing using PostgreSQL for our database. As such, you will need to install PostgreSQL. A good guide to get you started for most operating systems can be found [here.](https://www.timescale.com/blog/how-to-install-psql-on-mac-ubuntu-debian-windows/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+#### 2. Setup NPM
+If you do not already have NPM installed, you will need to install it. Unix based systems should take advantage of a package called [nvm](https://github.com/nvm-sh/nvm) to manage versions of Node.js. Windows systems should follow [this guide](https://learn.microsoft.com/en-us/windows/dev-environment/javascript/nodejs-on-windows) to install Node.js and NPM on their systems.
+
+Once you have installed these packages, you can verify that they are installed on your system with:
+
+```
+node -v
+npm -v
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### 3. Clone Repository
+Once you have verified that you have installed Node.js, PostgreSQL, you should be okay to clone the repository. 
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+**`git clone git@github.com:mattirizarry/CS351-Project.git`**
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+#### 4. Install Dependencies
+Navigate to the directory that was just installed. Then run, `npm install`. This will install all necessary packages on your system.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+#### 5. Setup Environment Variables
+To connect to your database, you will need to provide a `DATABASE_URL` that is served from a local `.env` file. 
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+In the root of the repository, run `touch .env`, and append the below content.
 
-## Learn More
+```
+DATABASE_URL="postgresql://[username]:[password]@[host]:[port]/[dbname]?schema=public"
+```
 
-To learn more about Next.js, take a look at the following resources:
+Replace the placeholders with your local database information, and it should look something like this.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+DATABASE_URL="postgresql://johndoe:x5dws169!@localhost:5432/mydb?schema=public"
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+#### 6. Setup Database
+Once you have created your `.env` file, you should now be able to connect to your database and migrate it
 
-## Deploy on Vercel
+To bring your local database up to the most recent schema, perform any migrations.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+npx prisma migrate dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+#### 7. Seed Database
+Once you have created your tables, you will have to change the provided `seed.sh.template` file with your database credentials. Once you have done so, rename the file to `seed.sh`. Then you can seed the database.
+
+#### 8. Launch Prisma CLI
+You can verify that the database got populated properly by running 
+```
+npx prisma studio
+```
+
+This will run a local server that you can access in browser to interact with your database.
+
+#### 9. Complete
+
+You can now develop in this project. To start the Next.js server, type:
+```
+npm run dev
+```
+To interact in the Prisma studio, the command is
+```
+npx prisma studio
+```

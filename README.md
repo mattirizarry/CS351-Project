@@ -1,3 +1,19 @@
+## Authors
+
+- [@mattirizarry](https://www.github.com/mattirizarry)
+
+
+# CS351 Project
+
+We have been tasked by a client to create a database application. They need a user friendly interface to interact with this with this database. They would like to:
+- Manage Customers
+- Have Managers and Representatives
+- Manage Orders
+- Manage Inventory
+- Authentication before destructive actions to the database
+- Display total price of all orders of a given customer
+- Display number of customers, and average balance of customers assigned to a given 
+The client would like control over their deployment, so they would like to use their existing database server. 
 
 ## Local environment setup
 
@@ -47,7 +63,7 @@ npx prisma migrate dev
 ```
 
 #### 7. Seed Database
-Once you have created your tables, you will have to change the provided `seed.sh.template` file with your database credentials. Once you have done so, rename the file to `seed.sh`. Then you can seed the database.
+Once you have created your tables, you will have to change the provided `seed.sh.template` file with your database credentials. Once you have done so, rename the file to `seed.sh`. Then you can seed the database by running `./seed.sh`
 
 #### 8. Launch Prisma CLI
 You can verify that the database got populated properly by running 
@@ -67,3 +83,5 @@ To interact in the Prisma studio, the command is
 ```
 npx prisma studio
 ```
+
+

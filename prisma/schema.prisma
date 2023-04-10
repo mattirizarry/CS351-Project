@@ -11,33 +11,30 @@ datasource db {
 }
 
 model User {
-  userNum        String     @id @db.Char(2)
-  lastName       String     @db.VarChar(15)
-  firstName      String     @db.VarChar(15)
-  street         String     @db.VarChar(15)
-  city           String     @db.VarChar(15)
-  state          String     @db.VarChar(2)
-  postalCode     String     @db.VarChar(5)
-  commission     Decimal    @db.Decimal(7, 2)
-  rate           Decimal    @db.Decimal(3, 2)
-  hashedPassword String     @db.VarChar(64)
-  hasAdmin       Boolean    @db.Boolean
-  customers      Customer[]
+  userNum    String     @id @db.Char(2)
+  lastName   String     @db.VarChar(15)
+  firstName  String     @db.VarChar(15)
+  street     String     @db.VarChar(15)
+  city       String     @db.VarChar(15)
+  state      String     @db.VarChar(2)
+  postalCode String     @db.VarChar(5)
+  commission Decimal    @db.Decimal(7, 2)
+  rate       Decimal    @db.Decimal(3, 2)
+  customers  Customer[]
 }
 
 model Customer {
-  customerNum String   @id @db.Char(3)
-  lastName    String   @db.VarChar(15)
-  firstName   String   @db.VarChar(15)
-  street      String   @db.VarChar(15)
-  city        String   @db.VarChar(15)
-  state       String   @db.VarChar(2)
-  postalCode  String   @db.VarChar(5)
-  balance     Decimal  @db.Decimal(8, 2)
-  creditLimit Decimal  @db.Decimal(8, 2)
-  userNum     String?  @db.Char(2)
-  user        User?    @relation(fields: [userNum], references: [userNum])
-  orders      Orders[]
+  customerNum  String   @id @db.Char(3)
+  customerName String   @db.VarChar(35)
+  street       String   @db.VarChar(20)
+  city         String   @db.VarChar(15)
+  state        String   @db.Char(2)
+  postalCode   String   @db.VarChar(5)
+  balance      Decimal  @db.Decimal(8, 2)
+  creditLimit  Decimal  @db.Decimal(8, 2)
+  userNum      String?  @db.Char(2)
+  user         User?    @relation(fields: [userNum], references: [userNum])
+  orders       Orders[]
 }
 
 model Orders {

@@ -9,8 +9,6 @@ CREATE TABLE "User" (
     "postalCode" VARCHAR(5) NOT NULL,
     "commission" DECIMAL(7,2) NOT NULL,
     "rate" DECIMAL(3,2) NOT NULL,
-    "password" VARCHAR(64) NOT NULL,
-    "role" BOOLEAN NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("userNum")
 );
@@ -18,11 +16,10 @@ CREATE TABLE "User" (
 -- CreateTable
 CREATE TABLE "Customer" (
     "customerNum" CHAR(3) NOT NULL,
-    "lastName" VARCHAR(15) NOT NULL,
-    "firstName" VARCHAR(15) NOT NULL,
-    "street" VARCHAR(15) NOT NULL,
+    "customerName" VARCHAR(35) NOT NULL,
+    "street" VARCHAR(20) NOT NULL,
     "city" VARCHAR(15) NOT NULL,
-    "state" VARCHAR(2) NOT NULL,
+    "state" CHAR(2) NOT NULL,
     "postalCode" VARCHAR(5) NOT NULL,
     "balance" DECIMAL(8,2) NOT NULL,
     "creditLimit" DECIMAL(8,2) NOT NULL,

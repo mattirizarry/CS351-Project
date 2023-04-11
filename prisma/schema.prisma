@@ -48,7 +48,7 @@ model Orders {
 model Item {
   itemNum     String      @id @db.Char(4)
   description String      @db.VarChar(30)
-  onHand      Decimal     @db.Decimal(4, 0)
+  onHand      Int     
   category    String      @db.VarChar(4)
   storehouse  String      @db.VarChar(1)
   price       Decimal     @db.Decimal(6, 2)

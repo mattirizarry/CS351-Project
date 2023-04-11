@@ -5,13 +5,13 @@ interface ResourceProps<T> {
   resourceComponent: (resource: T) => ReactNode
 }
 
-const ResourceDashboard = <T,>({ resourceData, resourceComponent }: ResourceProps<T>) => {
-
+const ResourceDashboard = <T,>({
+  resourceData,
+  resourceComponent
+}: ResourceProps<T>) => {
   const _renderResourceComponents = () =>
     resourceData.map((resource: T, index: number) => (
-      <Fragment key={index}>
-        { resourceComponent(resource) }
-      </Fragment>
+      <Fragment key={index}>{resourceComponent(resource)}</Fragment>
     ))
 
   return (

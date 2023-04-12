@@ -1,19 +1,20 @@
-import Image from "next/image"
-import { Inter } from "next/font/google"
 import { GetServerSideProps } from "next"
 import prisma from "@/lib/prisma"
 import { FC } from "react"
 import ResourceDashboard from "@/src/components/resourceDashboard"
 import { Customer } from "@prisma/client"
-
-const inter = Inter({ subsets: ["latin"] })
+import Link from "next/link"
 
 interface CustomerProps {
   serializedCustomers: Customer[]
 }
 
-const CustomerRow: FC<Customer> = ({ customerName }) => {
-  return <h1>{customerName}</h1>
+const CustomerRow: FC<Customer> = ({ customerName, customerNum }) => {
+  return (
+    <section className="customer-row">
+      <Link href={`/dashboard/customers/${customerNum}`}>{ customerName }</Link>
+    </section>
+  )
 }
 
 const CustomerDashboard: FC<CustomerProps> = ({ serializedCustomers }) => (

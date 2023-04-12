@@ -1,13 +1,16 @@
-import Image from "next/image"
-import { Inter } from "next/font/google"
 import { GetServerSideProps } from "next"
 import prisma from "@/lib/prisma"
 import ResourceDashboard from "@/src/components/resourceDashboard"
 import { Item } from "@prisma/client"
 import { FC } from "react"
+import Link from "next/link"
 
-const ItemRowComponent: FC<Item> = ({ description }) => {
-  return <h1>{description}</h1>
+const ItemRowComponent: FC<Item> = ({ description, itemNum }) => {
+  return (
+    <section className="item-row">
+      <Link href={`/dashboard/items/${itemNum}`}>{ description }</Link>
+    </section>
+  )
 }
 
 interface ItemProps {

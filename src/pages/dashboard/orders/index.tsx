@@ -3,6 +3,7 @@ import prisma from "@/lib/prisma"
 import { FC } from "react"
 import ResourceDashboard from "@/src/components/resourceDashboard"
 import { Orders } from "@prisma/client"
+import Link from "next/link"
 
 interface OrderProps {
   serializedOrders: Orders[]
@@ -11,8 +12,7 @@ interface OrderProps {
 const OrderRow: FC<Orders> = ({ orderNum, orderDate, customerNum }) => {
   return (
     <section className="order-row">
-      <p>{orderNum}</p>
-      <p>{customerNum}</p>
+      <Link href={`/dashboard/orders/${orderNum}`}>{ orderNum }</Link>
     </section>
   )
 }

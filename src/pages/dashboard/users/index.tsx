@@ -3,9 +3,14 @@ import prisma from "@/lib/prisma"
 import { FC } from "react"
 import ResourceDashboard from "@/src/components/resourceDashboard"
 import { User } from "@prisma/client"
+import Link from "next/link"
 
-const UserRowComponent: FC<User> = (props) => {
-  return <section className="user-row">{props.firstName}</section>
+const UserRowComponent: FC<User> = ({ userNum, firstName, lastName }) => {
+  return (
+    <section className="user-row">
+      <Link href={`/dashboard/users/${userNum}`}>{ lastName + ", " + firstName }</Link>
+    </section>
+  )
 }
 
 interface UserProps {

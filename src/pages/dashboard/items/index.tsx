@@ -1,16 +1,15 @@
-import { GetServerSideProps } from "next"
-import prisma from "@/lib/prisma"
-import ResourceDashboard from "@/src/components/resourceDashboard"
-import { Item } from "@prisma/client"
 import { FC } from "react"
+
+import { GetServerSideProps } from "next"
 import Link from "next/link"
 
+import prisma from "@/lib/prisma"
+import { Item } from "@prisma/client"
+
+import ResourceDashboard from "@/src/components/ResourceDashboard"
+
 const ItemRowComponent: FC<Item> = ({ description, itemNum }) => {
-  return (
-    <section className="item-row">
-      <Link href={`/dashboard/items/${itemNum}`}>{ description }</Link>
-    </section>
-  )
+  return <Link href={`/dashboard/items/${itemNum}`}>{description}</Link>
 }
 
 interface ItemProps {
@@ -18,9 +17,11 @@ interface ItemProps {
 }
 
 const ItemDashboard: FC<ItemProps> = ({ serializedItems }) => (
-  <ResourceDashboard
+  <ResourceDashboard<Item>
+    resourceTitle="Items"
     resourceData={serializedItems}
     resourceComponent={ItemRowComponent}
+    resourceIdentifier="itemNum"
   />
 )
 

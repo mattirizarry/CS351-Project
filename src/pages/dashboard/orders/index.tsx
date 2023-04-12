@@ -1,26 +1,27 @@
-import { GetServerSideProps } from "next"
-import prisma from "@/lib/prisma"
 import { FC } from "react"
-import ResourceDashboard from "@/src/components/resourceDashboard"
-import { Orders } from "@prisma/client"
+
+import { GetServerSideProps } from "next"
 import Link from "next/link"
+
+import prisma from "@/lib/prisma"
+import { Orders } from "@prisma/client"
+
+import ResourceDashboard from "@/src/components/ResourceDashboard"
 
 interface OrderProps {
   serializedOrders: Orders[]
 }
 
 const OrderRow: FC<Orders> = ({ orderNum, orderDate, customerNum }) => {
-  return (
-    <section className="order-row">
-      <Link href={`/dashboard/orders/${orderNum}`}>{ orderNum }</Link>
-    </section>
-  )
+  return <Link href={`/dashboard/orders/${orderNum}`}>{orderNum}</Link>
 }
 
 const OrderDashboard: FC<OrderProps> = ({ serializedOrders }) => (
   <ResourceDashboard
+    resourceTitle="Orders"
     resourceData={serializedOrders}
     resourceComponent={OrderRow}
+    resourceIdentifier="orderNum"
   />
 )
 

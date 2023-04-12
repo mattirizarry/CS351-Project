@@ -1,15 +1,18 @@
-import { GetServerSideProps } from "next"
-import prisma from "@/lib/prisma"
 import { FC } from "react"
-import ResourceDashboard from "@/src/components/resourceDashboard"
-import { User } from "@prisma/client"
+
+import { GetServerSideProps } from "next"
 import Link from "next/link"
+
+import prisma from "@/lib/prisma"
+import { User } from "@prisma/client"
+
+import ResourceDashboard from "@/src/components/ResourceDashboard"
 
 const UserRowComponent: FC<User> = ({ userNum, firstName, lastName }) => {
   return (
-    <section className="user-row">
-      <Link href={`/dashboard/users/${userNum}`}>{ lastName + ", " + firstName }</Link>
-    </section>
+    <Link href={`/dashboard/users/${userNum}`}>
+      {lastName + ", " + firstName}
+    </Link>
   )
 }
 
@@ -20,8 +23,10 @@ interface UserProps {
 const UserDashboard: FC<UserProps> = ({ serializedUsers }) => {
   return (
     <ResourceDashboard<User>
+      resourceTitle="Users"
       resourceData={serializedUsers}
       resourceComponent={UserRowComponent}
+      resourceIdentifier="userNum"
     />
   )
 }

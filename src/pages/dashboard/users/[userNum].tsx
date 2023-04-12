@@ -1,11 +1,15 @@
 import prisma from "@/lib/prisma"
+import Breadcrumbs from "@/src/components/Breadcrumbs"
 import { User } from "@prisma/client"
 import { GetServerSideProps } from "next"
 import { FC } from "react"
 
 const UserProfile: FC<User> = (props) => {
   return (
-    <section className="user-profile">{props.firstName}</section>
+    <main className="page-content user-profile">
+      <h1>{props.firstName}</h1>
+      <Breadcrumbs />
+    </main>
   )
 }
 

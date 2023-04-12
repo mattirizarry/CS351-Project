@@ -1,9 +1,12 @@
-import { GetServerSideProps } from "next"
-import prisma from "@/lib/prisma"
 import { FC } from "react"
-import ResourceDashboard from "@/src/components/resourceDashboard"
-import { Customer } from "@prisma/client"
+
+import { GetServerSideProps } from "next"
 import Link from "next/link"
+
+import prisma from "@/lib/prisma"
+import { Customer } from "@prisma/client"
+
+import ResourceDashboard from "@/src/components/ResourceDashboard"
 
 interface CustomerProps {
   serializedCustomers: Customer[]
@@ -11,16 +14,18 @@ interface CustomerProps {
 
 const CustomerRow: FC<Customer> = ({ customerName, customerNum }) => {
   return (
-    <section className="customer-row">
-      <Link href={`/dashboard/customers/${customerNum}`}>{ customerName }</Link>
-    </section>
+    <Link href={`/dashboard/customers/${customerNum}`}>
+      <p>{customerName}</p>
+    </Link>
   )
 }
 
 const CustomerDashboard: FC<CustomerProps> = ({ serializedCustomers }) => (
-  <ResourceDashboard
+  <ResourceDashboard<Customer>
+    resourceTitle="Customers"
     resourceData={serializedCustomers}
     resourceComponent={CustomerRow}
+    resourceIdentifier="customerNum"
   />
 )
 

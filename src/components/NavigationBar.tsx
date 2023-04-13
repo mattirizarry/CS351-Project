@@ -32,8 +32,8 @@ interface NavigationBarProps {
 
 const NavigationBar: FC<NavigationBarProps> = ({ active, handler }) => {
   const _renderNavLinks = () =>
-    links.map((link: NavLink) => (
-      <Link href={link.href} onClick={handler}>
+    links.map((link: NavLink, index) => (
+      <Link key={index} href={link.href} onClick={handler}>
         {link.label}
       </Link>
     ))

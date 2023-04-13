@@ -6,7 +6,7 @@ import Link from "next/link"
 import prisma from "@/lib/prisma"
 import { Customer } from "@prisma/client"
 
-import ResourceDashboard from "@/src/components/ResourceDashboard"
+import ResourceDashboard from "@/src/components/resourceDashboard"
 
 interface CustomerProps {
   serializedCustomers: Customer[]

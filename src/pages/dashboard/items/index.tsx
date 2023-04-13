@@ -6,7 +6,7 @@ import Link from "next/link"
 import prisma from "@/lib/prisma"
 import { Item } from "@prisma/client"
 
-import ResourceDashboard from "@/src/components/ResourceDashboard"
+import ResourceDashboard from "@/src/components/resourceDashboard"
 
 const ItemRowComponent: FC<Item> = ({ description, itemNum }) => {
   return <Link href={`/dashboard/items/${itemNum}`}>{description}</Link>

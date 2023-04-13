@@ -6,7 +6,7 @@ import Link from "next/link"
 import prisma from "@/lib/prisma"
 import { User } from "@prisma/client"
 
-import ResourceDashboard from "@/src/components/ResourceDashboard"
+import ResourceDashboard from "@/src/components/resourceDashboard"
 
 const UserRowComponent: FC<User> = ({ userNum, firstName, lastName }) => {
   return (

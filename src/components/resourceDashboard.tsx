@@ -17,6 +17,7 @@ const ResourceDashboard = <T,>({
   resourceIdentifier
 }: ResourceProps<T>) => {
   const _renderResourceComponents = () => {
+
     return resourceData.map((resource: T, index: number) => {
       return (
         <section className="resource-row" key={index}>

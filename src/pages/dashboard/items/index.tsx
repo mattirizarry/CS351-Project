@@ -1,4 +1,4 @@
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
 
 import { GetServerSideProps } from "next"
 import Link from "next/link"
@@ -16,26 +16,31 @@ interface ItemProps {
   serializedItems: Item[]
 }
 
-const ItemDashboard: FC<ItemProps> = ({ serializedItems }) => (
-  <ResourceDashboard<Item>
-    resourceTitle="Items"
-    resourceData={serializedItems}
-    resourceComponent={ItemRowComponent}
-    resourceIdentifier="itemNum"
-  />
-)
+const ItemDashboard: FC<ItemProps> = ({ serializedItems }) => {
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const items = await prisma.item.findMany()
+  const [loading, setLoading] = useState<boolean>(true)
+  const [items, setItems] = useState<Item[]>([])
 
-  const serializedItems = items.map((item) => ({
-    ...item,
-    price: item.price.toJSON()
-  }))
+  async function getItems() {
+    const items = await fetch('/api/v1/items')
+      .then((response) => response.json())
 
-  return {
-    props: { serializedItems }
+      setLoading(false)
+      setItems(items)
   }
+
+  useEffect(() => {
+    getItems()
+  }, [])
+  
+  return(
+    <ResourceDashboard<Item>
+      resourceTitle="Items"
+      resourceData={items}
+      resourceComponent={ItemRowComponent}
+      resourceIdentifier="itemNum"
+    />
+  )
 }
 
 export default ItemDashboard

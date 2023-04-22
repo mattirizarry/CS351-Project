@@ -17,19 +17,16 @@ const ResourceDashboard = <T,>({
   resourceIdentifier
 }: ResourceProps<T>) => {
   const _renderResourceComponents = () => {
-
-    return resourceData.map((resource: T, index: number) => {
-      return (
-        <section className="resource-row" key={index}>
-          {resourceComponent(resource)}
-          <ActionButtons
-            resource={resourceTitle.toLowerCase()}
-            //@ts-ignore
-            resourceId={resource[resourceIdentifier]}
-          />
-        </section>
-      )
-    })
+    return resourceData.map((resource: T, index: number) => (
+      <section className="resource-row" key={index}>
+        {resourceComponent(resource)}
+        <ActionButtons
+          resource={resourceTitle.toLowerCase()}
+          //@ts-ignore
+          resourceId={resource[resourceIdentifier]}
+        />
+      </section>
+    ))
   }
 
   return (

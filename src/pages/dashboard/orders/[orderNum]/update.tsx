@@ -1,4 +1,5 @@
 import UpdateResource, { InputField } from "@/src/components/UpdateResource"
+import { useRouter } from "next/router"
 
 const _fields: InputField[] = [
   {
@@ -7,9 +8,12 @@ const _fields: InputField[] = [
   }
 ]
 
-const UpdateOrder = () => 
-  <UpdateResource 
-    fields={_fields}
-  />
+const UpdateOrder = () => {
+  return (
+    <UpdateResource 
+      fields={_fields}
+    />
+  )
+}
 
 export default UpdateOrder

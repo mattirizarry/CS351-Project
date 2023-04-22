@@ -3,37 +3,48 @@ import UpdateResource, { InputField } from "@/src/components/UpdateResource"
 const _fields: InputField[] = [
   {
     type: "text",
-    placeholder: "Customer Name"
+    placeholder: "Customer Name",
+    id: "customerName"
   },
   {
     type: "text",
-    placeholder: "Address"
+    placeholder: "Address",
+    id: "street"
   },
   {
     type: "text",
-    placeholder: "City"
+    placeholder: "City",
+    id: "city"
   },
   {
     type: "text",
-    placeholder: "State"
+    placeholder: "State",
+    id: "state"
   },
   {
     type: "number",
-    placeholder: "Zip Code"
+    placeholder: "Zip Code",
+    id: "postalCode"
   },
   {
     type: "number",
-    placeholder: "Balance"
+    placeholder: "Balance",
+    id: "balance"
   },
   {
     type: "number",
-    placeholder: "Credit Limit"
+    placeholder: "Credit Limit",
+    id: "creditLimit"
   }
 ]
 
-const UpdateCustomer = () => 
-  <UpdateResource 
-    fields={_fields}
-  />
+const UpdateCustomer = () => {
+
+  return (
+    <UpdateResource 
+      fields={_fields}
+    />
+  )
+}
 
 export default UpdateCustomer

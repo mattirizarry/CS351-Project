@@ -4,7 +4,7 @@ import Link from "next/link"
 
 import { Customer } from "@prisma/client"
 
-import ResourceDashboard from "@/src/components/resourceDashboard"
+import ResourceDashboard from "@/src/components/ResourceDashboard"
 
 const CustomerRow: FC<Customer> = ({ customerName, customerNum }) => {
   return (
@@ -37,6 +37,7 @@ const CustomerDashboard = () => {
       resourceData={customers}
       resourceComponent={CustomerRow}
       resourceIdentifier="customerNum"
+      loading={loading}
     />
   )
 }

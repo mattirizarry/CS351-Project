@@ -1,6 +1,12 @@
+import WriteResource from "@/src/components/WriteResource"
+import { customerFields } from "@/src/config/customerFields"
+
 const CreateCustomer = () => {
   return (
-    <h1>Hello WOrld</h1>
+    <WriteResource
+      fields={customerFields}
+      operation="create"
+    />
   )
 }
 

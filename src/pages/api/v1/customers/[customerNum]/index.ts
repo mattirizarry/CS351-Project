@@ -1,8 +1,7 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
-import { Customer, PrismaClient } from "@prisma/client";
+import prisma from "@/src/lib/prisma";
+import { Customer } from "@prisma/client";
 import type { NextApiRequest, NextApiResponse } from "next"
-
-const prisma = new PrismaClient();
 
 export default async function handler(
   req: NextApiRequest,
@@ -20,7 +19,8 @@ export default async function handler(
       state: true,
       postalCode: true,
       balance: true,
-      creditLimit: true
+      creditLimit: true,
+      customerNum: true
     }
   })
 

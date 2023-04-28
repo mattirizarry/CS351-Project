@@ -1,12 +1,7 @@
-import { FC } from "react"
-
-import { GetServerSideProps } from "next"
+import { FC, useEffect, useState } from "react"
 import Link from "next/link"
-
-import prisma from "@/lib/prisma"
 import { User } from "@prisma/client"
-
-import ResourceDashboard from "@/src/components/resourceDashboard"
+import ResourceDashboard from "@/src/components/ResourceDashboard"
 
 const UserRowComponent: FC<User> = ({ userNum, firstName, lastName }) => {
   return (
@@ -16,33 +11,32 @@ const UserRowComponent: FC<User> = ({ userNum, firstName, lastName }) => {
   )
 }
 
-interface UserProps {
-  serializedUsers: User[]
-}
+const UserDashboard = () => {
 
-const UserDashboard: FC<UserProps> = ({ serializedUsers }) => {
+  const [loading, setLoading] = useState<boolean>(true)
+  const [users, setUsers] = useState<User[]>([])
+
+  async function getUsers() {
+    const users = await fetch('/api/v1/users')
+      .then((response) => response.json())
+
+    setLoading(false)
+    setUsers(users)
+  }
+
+  useEffect(() => {
+    getUsers()
+  }, [])
+
   return (
     <ResourceDashboard<User>
       resourceTitle="Users"
-      resourceData={serializedUsers}
+      resourceData={users}
       resourceComponent={UserRowComponent}
       resourceIdentifier="userNum"
+      loading={loading}
     />
   )
-}
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const users = await prisma.user.findMany()
-
-  const serializedUsers = users.map((user) => ({
-    ...user,
-    commission: user.commission.toJSON(),
-    rate: user.rate.toJSON()
-  }))
-
-  return {
-    props: { serializedUsers }
-  }
 }
 
 export default UserDashboard

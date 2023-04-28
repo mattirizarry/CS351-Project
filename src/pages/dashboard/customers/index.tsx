@@ -1,16 +1,10 @@
-import { FC } from "react"
+import { FC, useEffect, useState } from "react"
 
-import { GetServerSideProps } from "next"
 import Link from "next/link"
 
-import prisma from "@/lib/prisma"
 import { Customer } from "@prisma/client"
 
-import ResourceDashboard from "@/src/components/resourceDashboard"
-
-interface CustomerProps {
-  serializedCustomers: Customer[]
-}
+import ResourceDashboard from "@/src/components/ResourceDashboard"
 
 const CustomerRow: FC<Customer> = ({ customerName, customerNum }) => {
   return (
@@ -20,27 +14,32 @@ const CustomerRow: FC<Customer> = ({ customerName, customerNum }) => {
   )
 }
 
-const CustomerDashboard: FC<CustomerProps> = ({ serializedCustomers }) => (
-  <ResourceDashboard<Customer>
-    resourceTitle="Customers"
-    resourceData={serializedCustomers}
-    resourceComponent={CustomerRow}
-    resourceIdentifier="customerNum"
-  />
-)
+const CustomerDashboard = () => {
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const customers = await prisma.customer.findMany()
+  const [loading, setLoading] = useState<boolean>(true)
+  const [customers, setCustomers] = useState<Customer[]>([])
 
-  const serializedCustomers = customers.map((customer) => ({
-    ...customer,
-    balance: customer.balance.toJSON(),
-    creditLimit: customer.creditLimit.toJSON()
-  }))
+  async function getCustomers() {
+    const customers = await fetch('/api/v1/customers')
+      .then((response) => response.json())
 
-  return {
-    props: { serializedCustomers }
+      setLoading(false)
+      setCustomers(customers)
   }
+
+  useEffect(() => {
+    getCustomers()
+  }, [])
+
+  return (
+    <ResourceDashboard<Customer>
+      resourceTitle="Customers"
+      resourceData={customers}
+      resourceComponent={CustomerRow}
+      resourceIdentifier="customerNum"
+      loading={loading}
+    />
+  )
 }
 
 export default CustomerDashboard

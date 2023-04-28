@@ -16,9 +16,9 @@ const Breadcrumbs = () => {
 
     return breadcrumbs.map(({ url, name }, index) => {
       return index === breadcrumbs.length - 1 ? (
-        <p className="breadcrumb-item">{name}</p>
+        <p className="breadcrumb-item" key={name}>{name}</p>
       ) : (
-        <Link className="breadcrumb-item" href={url}>
+        <Link className="breadcrumb-item" href={url} key={url}>
           {name}
         </Link>
       )

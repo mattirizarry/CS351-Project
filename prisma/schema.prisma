@@ -21,6 +21,7 @@ model User {
   commission Decimal    @db.Decimal(7, 2)
   rate       Decimal    @db.Decimal(3, 2)
   customers  Customer[]
+  password   String?    @db.Text
 }
 
 model Customer {

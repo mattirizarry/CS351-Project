@@ -1,41 +1,39 @@
-import { FC } from "react"
-
-import { GetServerSideProps } from "next"
+import { FC, useEffect, useState } from "react"
 import Link from "next/link"
-
-import prisma from "@/lib/prisma"
 import { Orders } from "@prisma/client"
 
-import ResourceDashboard from "@/src/components/resourceDashboard"
-
-interface OrderProps {
-  serializedOrders: Orders[]
-}
+import ResourceDashboard from "@/src/components/ResourceDashboard"
 
 const OrderRow: FC<Orders> = ({ orderNum, orderDate, customerNum }) => {
   return <Link href={`/dashboard/orders/${orderNum}`}>{orderNum}</Link>
 }
 
-const OrderDashboard: FC<OrderProps> = ({ serializedOrders }) => (
-  <ResourceDashboard
-    resourceTitle="Orders"
-    resourceData={serializedOrders}
-    resourceComponent={OrderRow}
-    resourceIdentifier="orderNum"
-  />
-)
+const OrderDashboard = () => {
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const orders = await prisma.orders.findMany()
+  const [loading, setLoading] = useState<boolean>(true)
+  const [orders, setOrders] = useState<Orders[]>([])
 
-  const serializedOrders = orders.map((order) => ({
-    ...order,
-    orderDate: order.orderDate.toJSON()
-  }))
+  async function getOrders() {
+    const orders = await fetch('/api/v1/orders')
+      .then((response) => response.json())
 
-  return {
-    props: { serializedOrders }
+      setLoading(false)
+      setOrders(orders)
   }
+
+  useEffect(() => {
+    getOrders()
+  }, [])
+
+  return (
+    <ResourceDashboard
+      resourceTitle="Orders"
+      resourceData={orders}
+      resourceComponent={OrderRow}
+      resourceIdentifier="orderNum"
+      loading={loading}
+    />
+  )
 }
 
 export default OrderDashboard

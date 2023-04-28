@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react"
 import Link from "next/link"
 import { User } from "@prisma/client"
-import ResourceDashboard from "@/src/components/resourceDashboard"
+import ResourceDashboard from "@/src/components/ResourceDashboard"
 
 const UserRowComponent: FC<User> = ({ userNum, firstName, lastName }) => {
   return (
@@ -11,11 +11,7 @@ const UserRowComponent: FC<User> = ({ userNum, firstName, lastName }) => {
   )
 }
 
-interface UserProps {
-  serializedUsers: User[]
-}
-
-const UserDashboard: FC<UserProps> = () => {
+const UserDashboard = () => {
 
   const [loading, setLoading] = useState<boolean>(true)
   const [users, setUsers] = useState<User[]>([])
@@ -38,6 +34,7 @@ const UserDashboard: FC<UserProps> = () => {
       resourceData={users}
       resourceComponent={UserRowComponent}
       resourceIdentifier="userNum"
+      loading={loading}
     />
   )
 }

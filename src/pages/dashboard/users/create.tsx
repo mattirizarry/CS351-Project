@@ -1,14 +1,13 @@
 import WriteResource from "@/src/components/WriteResource"
 import { userFields } from "@/src/config/userFields"
 
-
-const UpdateUser = () => {
+const CreateUser = () => {
   return (
     <WriteResource
       fields={userFields}
-      operation="update"
+      operation="create"
     />
   )
 }
 
-export default UpdateUser
+export default CreateUser

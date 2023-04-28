@@ -1,0 +1,154 @@
+@import 'normalize'
+@import 'vars'
+
+@import 'pages/index'
+@import 'pages/dashboard'
+
+@import 'pages/resource'
+
+@import 'ui/footer'
+@import 'ui/nav'
+@import 'ui/breadcrumbs'
+@import 'ui/writeResource'
+
+html
+  font-family: Arial, Helvetica, sans-serif
+  background: #E5E7E6
+
+body
+
+  #__next
+    display: grid
+    grid-template-rows: 8rem 1fr 10rem
+    position: relative
+
+  main.page-content
+    padding: 0 1.6rem
+    min-height: calc( 100vh - 18rem )
+
+  h1
+    font-size: 3.4rem
+    font-weight: bolder
+
+  h2
+    font-size: 2.9rem
+
+  h3
+    font-size: 2.4rem
+
+  h4
+    font-size: 1.9rem
+
+  h5
+    font-size: 1.4rem
+
+  h6
+    font-size: 1rem
+
+  p
+    font-size: 1.2rem
+    line-height: 1.45rem
+
+  a
+    text-decoration: none
+    color: black
+    transition: 200ms ease-out
+
+  ol, ul
+    font-size: 1.2rem
+    padding-inline-start: 2.4rem
+
+  section.input-field
+    position: relative
+
+    label
+      position: absolute
+      font-size: 1.6rem
+      font-weight: bold
+      z-index: 1
+      top: 50%
+      left: 0
+      transform: translateY(-50%)
+      cursor: text
+      transition: 200ms ease-out
+
+    input
+      z-index: 2
+      position: relative
+      -webkit-appearance: none
+      outline: none
+      border-bottom: 0.2rem solid darken($light_gray,50%)
+      border-width: 0 0 0.2rem 0
+      background: none
+      font-size: 1.6rem
+      padding: 1rem 0 0.2rem
+      width: 100%
+      transition: border-bottom-color 0.3s ease-out
+
+      &:focus + label, 
+      &:valid + label
+        top: 0
+        font-size: 1.1rem
+
+      &::-webkit-input-placeholder
+        position: absolute
+        transition: all 0.2s ease-in-out
+
+      &:focus
+        border-bottom-color: $red
+
+        &::-webkit-input-placeholder
+          font-size: 1rem
+
+  .btn
+    font-size: 1.4rem
+    border-radius: 0.5rem
+    padding: 1rem 2.6rem
+    font-weight: light
+    border-style: solid
+    border-width: 0.1rem
+    cursor: pointer
+    box-shadow: 0 0 0.5rem 0.1rem rgba(0,0,0, 0.3)
+    color: lighten(#E5E7E6,25%)
+    transition: 300ms ease-in
+
+    &.xs
+      padding: 0.4rem 0.6rem
+      display: grid
+      place-content: center
+
+    &.delete
+      background: $red
+      border-color: darken($red,5%)
+
+    &.delete:hover
+      background: darken($red, 5%)
+      border-color: darken($red, 10%)
+      box-shadow: 0 0 0.5rem 0.2rem rgba(lighten($red, 20%), 0.9)
+
+    &.primary
+      border-color: darken($dark_gray,5%)
+      background: darken($dark_gray,5%)
+
+    &.primary:hover
+      background: darken($dark_gray, 5%)
+      border-color: darken($dark_gray, 10%)
+      box-shadow: 0 0 0.5rem 0.2rem rgba(lighten($dark_gray, 20%), 0.9)
+
+    &.update
+      background: #e2ca55
+      border-color: darken(#e2ca55, 5%)
+
+    &.update:hover
+      background: darken(#e2ca55, 5%)
+      border-color: darken(#e2ca55, 10%)
+
+    &.secondary
+      background: #2FA9B1
+      border-color: darken(#2FA9B1, 5%)
+
+    &.secondary:hover
+      background: darken(#2FA9B1, 5%)
+      border-color: darken(#2FA9B1, 10%)
+      box-shadow: 0 0 0.5rem 0.1rem rgba(lighten(#2FA9B1, 20%), 0.9)
+  

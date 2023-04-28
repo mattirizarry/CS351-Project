@@ -1,0 +1,53 @@
+.resource-page
+
+  display: grid
+  grid-template-rows: 8.4rem 5rem 1fr
+
+  .header
+    display: grid
+    grid-template-columns: 1fr 13rem
+    justify-content: space-between
+    align-items: center
+
+  .resource-data-table
+    display: grid
+    border: 0.1rem solid darken($light_gray, 5%)
+    align-self: start
+
+    .resource-row
+      display: grid
+      grid-template-columns: 1fr 1fr
+      align-items: center
+      padding: 0.4rem 1rem
+
+      &.lazy
+        height: 2.4rem
+
+        span
+          background: darken($light_gray, 10%)
+          width: 100%
+          height: 2rem
+          animation: pulse 1s infinite
+
+      &:nth-child(odd)
+        background: darken($light_gray, 5%)
+
+      .action-buttons
+
+        justify-self: end
+
+        display: grid
+        grid-template-columns: 3rem 3rem
+        column-gap: 0.5rem
+        color: white
+
+        a.btn, a.btn:hover
+          color: white
+
+@keyframes pulse
+  0%
+    opacity: 1
+  50%
+    opacity: 0.5
+  100%
+    opacity: 1

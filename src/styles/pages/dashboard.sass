@@ -1,0 +1,23 @@
+main.dashboard
+
+  nav.dashboard-nav
+    display: grid
+    grid-gap: 2rem
+    grid: 1fr 1fr / 1fr 1fr
+    align-items: center
+
+    .dashboard-item
+      display: grid
+      grid-template-rows: 8rem 6rem 2rem
+      align-items: center
+      border: 0.1rem solid darken($light_gray, 5%)
+      border-radius: 0.4rem
+      padding: 1rem
+      justify-items: center
+
+      svg
+        height: 7rem
+        width: auto
+
+      a, a:hover, a:active 
+        color: $light_gray

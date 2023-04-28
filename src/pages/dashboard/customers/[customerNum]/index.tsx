@@ -1,10 +1,16 @@
-import prisma from "@/lib/prisma"
+import prisma from "@/src/lib/prisma"
+import Breadcrumbs from "@/src/components/Breadcrumbs"
 import { Customer } from "@prisma/client"
 import { GetServerSideProps } from "next"
 import { FC } from "react"
 
 const CustomerProfile: FC<Customer> = ({ customerName }) => {
-  return <section className="customer-profile">{customerName}</section>
+  return (
+    <main className="page-content customer-profile">
+      <h1>{customerName}</h1>
+      <Breadcrumbs />
+    </main>
+  )
 }
 
 export default CustomerProfile

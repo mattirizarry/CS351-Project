@@ -1,41 +1,45 @@
-import { GetServerSideProps } from "next"
-import prisma from "@/lib/prisma"
-import { FC } from "react"
-import ResourceDashboard from "@/src/components/resourceDashboard"
-import { Customer } from "@prisma/client"
+import { FC, useEffect, useState } from "react"
+
 import Link from "next/link"
 
-interface CustomerProps {
-  serializedCustomers: Customer[]
-}
+import { Customer } from "@prisma/client"
+
+import ResourceDashboard from "@/src/components/ResourceDashboard"
 
 const CustomerRow: FC<Customer> = ({ customerName, customerNum }) => {
   return (
-    <section className="customer-row">
-      <Link href={`/dashboard/customers/${customerNum}`}>{ customerName }</Link>
-    </section>
+    <Link href={`/dashboard/customers/${customerNum}`}>
+      <p>{customerName}</p>
+    </Link>
   )
 }
 
-const CustomerDashboard: FC<CustomerProps> = ({ serializedCustomers }) => (
-  <ResourceDashboard
-    resourceData={serializedCustomers}
-    resourceComponent={CustomerRow}
-  />
-)
+const CustomerDashboard = () => {
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const customers = await prisma.customer.findMany()
+  const [loading, setLoading] = useState<boolean>(true)
+  const [customers, setCustomers] = useState<Customer[]>([])
 
-  const serializedCustomers = customers.map((customer) => ({
-    ...customer,
-    balance: customer.balance.toJSON(),
-    creditLimit: customer.creditLimit.toJSON()
-  }))
+  async function getCustomers() {
+    const customers = await fetch('/api/v1/customers')
+      .then((response) => response.json())
 
-  return {
-    props: { serializedCustomers }
+      setLoading(false)
+      setCustomers(customers)
   }
+
+  useEffect(() => {
+    getCustomers()
+  }, [])
+
+  return (
+    <ResourceDashboard<Customer>
+      resourceTitle="Customers"
+      resourceData={customers}
+      resourceComponent={CustomerRow}
+      resourceIdentifier="customerNum"
+      loading={loading}
+    />
+  )
 }
 
 export default CustomerDashboard

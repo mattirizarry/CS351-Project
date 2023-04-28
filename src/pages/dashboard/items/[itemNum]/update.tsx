@@ -1,26 +1,37 @@
-import UpdateResource, { InputField } from "@/src/components/UpdateResource"
+import { InputField } from "@/src/components/InputComponent"
+import UpdateResource from "@/src/components/UpdateResource"
 import { useRouter } from "next/router"
 
 const _fields: InputField[] = [
   {
     type: "text",
-    placeholder: "Description"
+    placeholder: "Description",
+    id: "description",
+    value: ""
   },
   {
     type: "text",
-    placeholder: "On Hand"
+    placeholder: "On Hand",
+    id: "onHand",
+    value: ""
   },
   {
     type: "text",
-    placeholder: "Category"
+    placeholder: "Category",
+    id: "category",
+    value: ""
   },
   {
     type: "text",
-    placeholder: "Storehouse"
+    placeholder: "Storehouse",
+    id: "storehouse",
+    value: ""
   },
   {
     type: "number",
-    placeholder: "Price"
+    placeholder: "Price",
+    id: "price",
+    value: ""
   }
 ]
 

@@ -70,8 +70,16 @@ body
     padding: 1rem 0
     transition: border-bottom-color 0.3s ease-out
 
+    &::-webkit-input-placeholder
+      position: absolute
+      transition: all 0.2s ease-in-out
+
     &:focus
       border-bottom-color: $red
+
+      &::-webkit-input-placeholder
+        font-size: 1rem
+
 
   label
     font-size: 1.6rem

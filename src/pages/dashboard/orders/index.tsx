@@ -4,15 +4,11 @@ import { Orders } from "@prisma/client"
 
 import ResourceDashboard from "@/src/components/resourceDashboard"
 
-interface OrderProps {
-  serializedOrders: Orders[]
-}
-
 const OrderRow: FC<Orders> = ({ orderNum, orderDate, customerNum }) => {
   return <Link href={`/dashboard/orders/${orderNum}`}>{orderNum}</Link>
 }
 
-const OrderDashboard: FC<OrderProps> = ({ serializedOrders }) => {
+const OrderDashboard = () => {
 
   const [loading, setLoading] = useState<boolean>(true)
   const [orders, setOrders] = useState<Orders[]>([])

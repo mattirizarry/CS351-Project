@@ -4,7 +4,9 @@ import { useRouter } from "next/router"
 const _fields: InputField[] = [
   {
     type: "date",
-    placeholder: "Order Date"
+    placeholder: "Order Date",
+    id: "orderDate",
+    value: ""
   }
 ]
 

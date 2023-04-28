@@ -5,8 +5,6 @@ import {
   BsReceiptCutoff,
   BsFillBoxSeamFill
 } from "react-icons/bs"
-import { GetServerSideProps } from "next"
-import prisma from "@/lib/prisma"
 import { FC, useState } from "react"
 import Breadcrumbs from "@/src/components/Breadcrumbs"
 

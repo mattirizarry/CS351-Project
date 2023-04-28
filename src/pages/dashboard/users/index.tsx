@@ -1,11 +1,6 @@
 import { FC, useEffect, useState } from "react"
-
-import { GetServerSideProps } from "next"
 import Link from "next/link"
-
-import prisma from "@/lib/prisma"
 import { User } from "@prisma/client"
-
 import ResourceDashboard from "@/src/components/resourceDashboard"
 
 const UserRowComponent: FC<User> = ({ userNum, firstName, lastName }) => {

@@ -24,7 +24,7 @@ export default async function handler(
     return
   }
 
-  if (user.password == null) {
+  if (!user.password) {
     return
   }
   

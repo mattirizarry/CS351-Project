@@ -6,21 +6,31 @@ export interface InputField {
   id: string
   value: any
   handler?: (e: ChangeEvent<HTMLInputElement>) => void
+  minimum?: number
+  maximum?: number
+  pattern?: string
+  maxLength?: number
+  step?: number
 }
 
-const InputComponent: FC<InputField> = ({ type, placeholder, id, value, handler}) => {
+const InputComponent: FC<InputField> = ({ type, placeholder, id, value, handler, minimum, pattern, maxLength,step, maximum }) => {
   return (
     <section className="input-field">
-      <label>
-        {}
-      </label>
       <input 
-        type={type} 
-        placeholder={placeholder} 
+        type={type}
         value={value}
         onChange={handler}
         id={id}
+        required
+        min={minimum}
+        pattern={pattern}
+        maxLength={maxLength}
+        step={step}
+        max={maximum}
       />
+      <label>
+        {placeholder}
+      </label>
     </section>
   )
 }

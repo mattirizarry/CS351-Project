@@ -1,15 +1,13 @@
 import WriteResource from "@/src/components/WriteResource"
 import { itemFields } from "@/src/config/itemFields"
 
-
-
-const UpdateItem = () => {
+const CreateItem = () => {
   return (
-    <WriteResource 
+    <WriteResource
       fields={itemFields}
-      operation="update"
+      operation="create"
     />
   )
 }
 
-export default UpdateItem
+export default CreateItem

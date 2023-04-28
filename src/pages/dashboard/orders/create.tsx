@@ -1,13 +1,13 @@
 import WriteResource from "@/src/components/WriteResource"
 import { orderFields } from "@/src/config/orderFields"
 
-const UpdateOrder = () => {
+const CreateOrder = () => {
   return (
-    <WriteResource 
+    <WriteResource
       fields={orderFields}
-      operation="update"
+      operation="create"
     />
   )
 }
 
-export default UpdateOrder
+export default CreateOrder

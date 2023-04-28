@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react"
 import Link from "next/link"
 import { Orders } from "@prisma/client"
 
-import ResourceDashboard from "@/src/components/resourceDashboard"
+import ResourceDashboard from "@/src/components/ResourceDashboard"
 
 const OrderRow: FC<Orders> = ({ orderNum, orderDate, customerNum }) => {
   return <Link href={`/dashboard/orders/${orderNum}`}>{orderNum}</Link>
@@ -31,6 +31,7 @@ const OrderDashboard = () => {
       resourceData={orders}
       resourceComponent={OrderRow}
       resourceIdentifier="orderNum"
+      loading={loading}
     />
   )
 }

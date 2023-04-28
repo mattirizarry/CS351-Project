@@ -1,4 +1,4 @@
-import prisma from "@/lib/prisma"
+import prisma from "@/src/lib/prisma"
 import Breadcrumbs from "@/src/components/Breadcrumbs"
 import { Orders } from "@prisma/client"
 import { GetServerSideProps } from "next"

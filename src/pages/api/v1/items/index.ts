@@ -5,10 +5,20 @@ import type { NextApiRequest, NextApiResponse } from "next"
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Item[]>
+  res: NextApiResponse<Item[] | {message: string}>
 ) {
 
-  const items = await prisma.item.findMany()
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
 
-  res.status(200).json(items);
+    if (!token) {
+      return res.status(401).json({ message: 'Authentication failed: Missing token' });
+    } 
+
+    const items = await prisma.item.findMany()
+  
+    res.status(200).json(items);
+  } catch (error) {
+    res.status(401).json({ message: 'Authentication failed: Invalid token' })
+  }
 }

@@ -21,3 +21,26 @@ main.dashboard
 
       a, a:hover, a:active 
         color: $light_gray
+
+  .reports 
+    margin-top: 2rem
+    display: grid
+    grid-template-rows: 8rem 1fr
+    row-gap: 2rem
+
+    .buttons
+      display: grid
+      grid-template-columns: 1fr 1fr
+      column-gap: 2rem
+
+    .report
+      grid-column-start: 1
+      grid-row-start: 2
+      grid-column-end: 3
+      background: darken($light_gray, 5%)
+      padding: 2rem 0.8rem
+
+      .cust-row, .user-row
+        font-family: monospace
+        display: grid
+        grid-template-columns: 20rem 2rem 2rem

@@ -15,29 +15,11 @@ const CustomerRow: FC<Customer> = ({ customerName, customerNum }) => {
 }
 
 const CustomerDashboard = () => {
-
-  const [loading, setLoading] = useState<boolean>(true)
-  const [customers, setCustomers] = useState<Customer[]>([])
-
-  async function getCustomers() {
-    const customers = await fetch('/api/v1/customers')
-      .then((response) => response.json())
-
-      setLoading(false)
-      setCustomers(customers)
-  }
-
-  useEffect(() => {
-    getCustomers()
-  }, [])
-
   return (
     <ResourceDashboard<Customer>
       resourceTitle="Customers"
-      resourceData={customers}
       resourceComponent={CustomerRow}
       resourceIdentifier="customerNum"
-      loading={loading}
     />
   )
 }

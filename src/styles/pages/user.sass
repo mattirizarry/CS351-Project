@@ -1,0 +1,50 @@
+main.user-page
+
+  h1
+    align-self: end
+
+  &.lazy
+
+    .img
+      background: darken($light_gray, 10%)
+      height: 12.8rem
+      width: 12.8rem
+      animation: pulse 1s infinite
+
+    .h1, .h3, .p
+      background: darken($light_gray, 10%)
+      animation: pulse 1s infinite
+
+    .h1
+      height: 8.2rem
+
+    .p
+      height: 1.45rem
+
+  .profile-header
+    display: grid
+    grid-template-columns: 1fr 12.8rem
+
+  .profile-content 
+    margin-top: 4rem
+    row-gap: 2rem
+    display: grid
+
+  .representative-report
+    display: grid
+    row-gap: 2rem
+    margin-top: 3rem
+    background: darken($light_gray, 5%)
+    padding: 2rem 0.8rem
+
+    .rep-report-summary
+      display: grid
+      row-gap: 1rem
+
+@keyframes pulse
+  0%
+    opacity: 1
+  50%
+    opacity: 0.5
+  100%
+    opacity: 1

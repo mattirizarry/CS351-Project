@@ -15,7 +15,6 @@ export default async function handler(
           orderNum: req.query.orderNum
         }
       })
-        .then((resp) => console.log(`Deleted Order ${ req.query.orderNum }`))
 
       res.status(200).json(result)
     }

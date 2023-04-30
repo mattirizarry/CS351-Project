@@ -8,12 +8,9 @@ export default async function handler(
   res: NextApiResponse<User>
 ) {
 
-  console.log(req.body)
-
   const response = await prisma.orders.create({
     data: req.body
   })
-    .then((resp) => console.log(`Order Created ${resp}`))
 
   res.status(200)
 }

@@ -1,10 +1,13 @@
 import { ChangeEvent, useState } from "react"
-import InputComponent from "../components/InputComponent"
+import { login } from "@/src/lib/authlib"
+import InputComponent from "@/src/components/InputComponent"
+import { useRouter } from "next/router"
 
-export default function Home() {
+export default function Login() {
 
   const [userNum, setUserNum] = useState<string>("")
   const [password, setPassword] = useState<string>("")
+  const router = useRouter()
 
   const _handleSetUserNum = (e: ChangeEvent<HTMLInputElement>) =>
     setUserNum(e.currentTarget.value)
@@ -12,22 +15,19 @@ export default function Home() {
     setPassword(e.currentTarget.value)
 
   async function handleLogin() {
-    const response = await fetch('/api/v1/auth/sign_in',
-    {
-      method: "POST",
-      body: JSON.stringify({
-        userNum: userNum,
-        password: password
-      })
-    })
-      .then((resp) => resp.json())
+    const didLogin = await login(userNum, password)
+      .catch((err) => console.log(err))
 
-    console.log(response)
+    if (didLogin) {
+      router.push('/dashboard')
+    }
   }
 
   return (
     <main className="page-content login-screen">
+      <img src="/hero.jpeg" />
       <section className="login-form">
+        <h1>CS351 Final Project</h1>
         <InputComponent
           type="userNum"
           handler={_handleSetUserNum}

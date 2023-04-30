@@ -1,7 +1,8 @@
-import { ChangeEvent, FC, useEffect, useState } from "react";
+import { ChangeEvent, FC, useContext, useEffect, useState } from "react";
 import Breadcrumbs from "./Breadcrumbs";
 import { useRouter } from "next/router";
 import InputComponent, {InputField} from "./InputComponent";
+import { AuthContext } from "../pages/_app";
 
 interface UpdateResourceProps {
   fields: InputField[]
@@ -15,6 +16,7 @@ interface FormState {
 const WriteResource: FC<UpdateResourceProps> = ({ fields, operation }) => {
 
   const router = useRouter()
+  const {token} = useContext(AuthContext)
 
   const [formData, setFormData] = useState<FormState>({})
 
@@ -35,9 +37,14 @@ const WriteResource: FC<UpdateResourceProps> = ({ fields, operation }) => {
     const match = path.match(regex)
 
     if (match) {
-      const res = await fetch(`/api/v1/${match[1]}/${match[2]}`)
+      const res = await fetch(`/api/v1/${match[1]}/${match[2]}`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
+      })
         .then((resp) => resp.json())
-        .catch((error) => console.log(error))
+        .catch((error) => {})
   
       // Update the state
   
@@ -59,7 +66,8 @@ const WriteResource: FC<UpdateResourceProps> = ({ fields, operation }) => {
       const response = await fetch(`/api/v1/${match[1]}/create`, {
         method: 'PUT',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(formData)
       })
@@ -67,7 +75,6 @@ const WriteResource: FC<UpdateResourceProps> = ({ fields, operation }) => {
         router.push(`/dashboard/${match[1]}/${match[2]}`)
       })
       .catch(error => {
-        console.log(error)
       })
     }
   }
@@ -85,7 +92,8 @@ const WriteResource: FC<UpdateResourceProps> = ({ fields, operation }) => {
       const response = await fetch(`/api/v1/${match[1]}/${match[2]}/update`, {
         method: 'PATCH',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`
         },
         body: JSON.stringify(formData)
       })
@@ -93,7 +101,6 @@ const WriteResource: FC<UpdateResourceProps> = ({ fields, operation }) => {
         router.push(`/dashboard/${match[1]}/${match[2]}`)
       })
       .catch(error => {
-        console.log(error)
       })
     }
   }

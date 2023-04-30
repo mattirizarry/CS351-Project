@@ -5,10 +5,19 @@ import type { NextApiRequest, NextApiResponse } from "next"
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<Customer[]>
+  res: NextApiResponse<Customer[] | {message: string}>
 ) {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
 
-  const customers = await prisma.customer.findMany()
+    if (!token) {
+      return res.status(401).json({ message: 'Authentication failed: Missing token' });
+    }
 
-  res.status(200).json(customers);
+    const customers = await prisma.customer.findMany()
+
+    res.status(200).json(customers);
+  } catch (error) {
+    res.status(401).json({ message: 'Authentication failed: Invalid token' })
+  }
 }

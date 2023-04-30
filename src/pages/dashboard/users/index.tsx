@@ -8,10 +8,11 @@ const UserRowComponent: FC<User> = ({ userNum, firstName, lastName }) =>
     {lastName + ", " + firstName}
   </Link>
 
-export default () => (
+const UserDashboard = () => (
   <ResourceDashboard<User>
     resourceTitle="Users"
     resourceComponent={UserRowComponent}
     resourceIdentifier="userNum"
   />
 )
+export default UserDashboard 

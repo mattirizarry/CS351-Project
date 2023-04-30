@@ -143,8 +143,10 @@ const CustomerProfile: FC<ICustomer> = ({data}) => {
   )
 }
 
-export default () => (
+const CustomerView = () => (
   <ResourceView>
     <CustomerProfile />
   </ResourceView>
 )
+
+export default CustomerView 

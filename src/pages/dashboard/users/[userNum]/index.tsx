@@ -136,8 +136,10 @@ const UserPage: FC<IUser> = ({ data }) => {
   )
 }
 
-export default () => (
+const UserView = () => (
   <ResourceView>
     <UserPage />
   </ResourceView>
 )
+
+export default UserView

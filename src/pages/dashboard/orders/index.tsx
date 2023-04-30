@@ -6,10 +6,12 @@ import ResourceDashboard from "@/src/components/ResourceDashboard"
 const OrderRow: FC<Orders> = ({ orderNum, orderDate, customerNum }) => 
   <Link href={`/dashboard/orders/${orderNum}`}>{orderNum}</Link>
 
-export default () => (
+const OrderDashboard = () => (
   <ResourceDashboard
     resourceTitle="Orders"
     resourceComponent={OrderRow}
     resourceIdentifier="orderNum"
   />
 )
+
+export default OrderDashboard

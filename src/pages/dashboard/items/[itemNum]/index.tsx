@@ -22,22 +22,3 @@ const ItemDetails: FC<Item> = ({
 }
 
 export default ItemDetails
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const item = await prisma.item.findUnique({
-    where: {
-      itemNum: String(params?.itemNum)
-    }
-  })
-
-  if (!item) return { notFound: true }
-
-  const serializedItem = {
-    ...item,
-    price: item.price.toJSON()
-  }
-
-  return {
-    props: { ...serializedItem }
-  }
-}

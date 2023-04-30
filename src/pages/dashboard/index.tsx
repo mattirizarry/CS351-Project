@@ -65,8 +65,8 @@ const Report: FC<IReport> = (props) => {
         })
       })
 
-      return Object.keys(data).map((k) => (
-        <section className="cust-row">
+      return Object.keys(data).map((k, i) => (
+        <section className="cust-row" key={i}>
           <p className="custNum">Customer #{k}</p>
           <p className="order">{data[k].count}</p>
           <p className="total">{data[k].total.toFixed(2)}</p>
@@ -108,8 +108,8 @@ const Report: FC<IReport> = (props) => {
         data[_rep.userNum] = curr
       })
 
-      return Object.keys(data).map((k) => (
-        <section className="user-row">
+      return Object.keys(data).map((k, i) => (
+        <section className="user-row" key={i}>
           <p className="userNum">User #{k}</p>
           <p className="numOfCust">{data[k].count}</p>
           <p className="avgBalance">${(data[k].total / data[k].count).toFixed(2)}</p>

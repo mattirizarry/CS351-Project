@@ -11,29 +11,11 @@ const ItemRowComponent: FC<Item> = ({ description, itemNum }) => {
 }
 
 const ItemDashboard = () => {
-
-  const [loading, setLoading] = useState<boolean>(true)
-  const [items, setItems] = useState<Item[]>([])
-
-  async function getItems() {
-    const items = await fetch('/api/v1/items')
-      .then((response) => response.json())
-
-      setLoading(false)
-      setItems(items)
-  }
-
-  useEffect(() => {
-    getItems()
-  }, [])
-  
   return(
     <ResourceDashboard<Item>
       resourceTitle="Items"
-      resourceData={items}
       resourceComponent={ItemRowComponent}
       resourceIdentifier="itemNum"
-      loading={loading}
     />
   )
 }

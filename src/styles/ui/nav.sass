@@ -7,7 +7,7 @@ header.site-header
   padding: 0 1.6rem
   align-content: center
 
-  nav.nav-links
+  nav
     position: fixed
     background: darken($light_gray, 5%)
     height: 100vh
@@ -20,6 +20,9 @@ header.site-header
     display: grid
     align-content: start
     row-gap: 0.6rem
+
+    .nav-links
+      display: grid
 
     &.true
       transform: translateX(-100vw)
@@ -35,6 +38,8 @@ header.site-header
     background: none
     cursor: pointer
     right: 1.6rem
+    top: 3.1rem
+    position: fixed
 
     &.true span.hamburger-box 
       

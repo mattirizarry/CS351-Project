@@ -14,7 +14,6 @@ export default async function handler(
       },
       data: req.body
     })
-      .then((resp) => console.log(`Updated Customer ${ req.query.customerNum }`))
 
     res.status(200).json(result)
   }

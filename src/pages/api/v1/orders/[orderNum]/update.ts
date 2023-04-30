@@ -13,7 +13,6 @@ export default async function handler(
       },
       data: req.body
     })
-      .then((resp) => console.log(`Updated Order ${req.query.orderNum}`))
 
     res.status(200).json(result)
   }

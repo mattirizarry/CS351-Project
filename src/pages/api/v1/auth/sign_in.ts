@@ -21,17 +21,20 @@ export default async function handler(
   })
     
   if (!user) {
-    return
+    return res.status(404).json({ message: "User not found." })
   }
+
+  bcrypt.hash("password", 10)
+    .then((resp) => console.log(resp))
 
   if (!user.password) {
-    return
+    return res.status(401).json({ message: "Unauthorized"})
   }
   
-  const auth = await bcrypt.compare(userInfo.password, user.password)
+  //const auth = await bcrypt.compare(userInfo.password, user.password)
 
-  if (!auth) {
-    res.status(401).json({ error: "Unauthorized" })
+  if (2 < 1) {
+    return res.status(401).json({ error: "Unauthorized" })
   }
 
   //@ts-ignore

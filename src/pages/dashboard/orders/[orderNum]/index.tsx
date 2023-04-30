@@ -14,22 +14,3 @@ const OrderDetails: FC<Orders> = ({ orderNum }) => {
 }
 
 export default OrderDetails
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const order = await prisma.orders.findUnique({
-    where: {
-      orderNum: String(params?.orderNum)
-    }
-  })
-
-  if (!order) return { notFound: true }
-
-  const serializedOrder = {
-    ...order,
-    orderDate: order.orderDate.toJSON()
-  }
-
-  return {
-    props: { ...serializedOrder }
-  }
-}

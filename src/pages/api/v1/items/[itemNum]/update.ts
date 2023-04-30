@@ -13,7 +13,6 @@ export default async function handler(
       },
       data: req.body
     })
-      .then((resp) => console.log(`Updated Item ${ req.query.itemNum }`))
 
     res.status(200).json(result)
   }

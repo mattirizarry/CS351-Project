@@ -24,21 +24,24 @@ export default async function handler(
     return res.status(404).json({ message: "User not found." })
   }
 
-  bcrypt.hash("password", 10)
-    .then((resp) => console.log(resp))
-
   if (!user.password) {
     return res.status(401).json({ message: "Unauthorized"})
   }
+
+  const hash = await bcrypt.hash(user.password, 10)
+
+  console.log("USER PWD HASH: " + hash)
   
-  //const auth = await bcrypt.compare(userInfo.password, user.password)
+  const auth = await bcrypt.compare(userInfo.password, user.password)
 
-  if (2 < 1) {
+  console.log("USER HAS AUTH  "+ auth)
+
+  if (!auth) {
     return res.status(401).json({ error: "Unauthorized" })
+  } else {
+    //@ts-ignore
+    const jwt = jsonwebtoken.sign({ userNum: userInfo.userNum }, process.env.JWT_SECRET)
+
+    res.status(200).json({ token: jwt, user })
   }
-
-  //@ts-ignore
-  const jwt = jsonwebtoken.sign({ userNum: userInfo.userNum }, process.env.JWT_SECRET)
-
-  res.status(200).json({ token: jwt, user })
 }

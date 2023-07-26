@@ -18,6 +18,8 @@ export default function Login() {
     const didLogin = await login(userNum, password)
       .catch((err) => console.log(err))
 
+    console.log(didLogin)
+
     if (didLogin) {
       router.push('/dashboard')
     }

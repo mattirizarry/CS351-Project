@@ -11,19 +11,7 @@ import Cookies from "js-cookie"
 const Main: FC<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter()
 
-  useEffect(() => {
-    const hasAuth = isAuthenticated()
-
-    if (router.asPath == '/') {
-      if (hasAuth) {
-        router.push('/dashboard')
-      }
-    } else {
-      if (!hasAuth) {
-        router.push('/')
-      }
-    }
-  }, [router.asPath])
+  
 
   return (
     <>
